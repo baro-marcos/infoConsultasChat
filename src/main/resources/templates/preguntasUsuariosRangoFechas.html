@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+	<title th:text="${titulo}"></title>
+
+</head>
+
+<body>
+
+	<div class="p-3 mb-2 bg-success-subtle text-emphasis-success">
+
+		<br>
+
+		<div class="container">
+			<h1 th:text="${tituloh1}"></h1>
+		</div>
+
+		<div class="container text-right">
+
+			<form class="form-inline" th:action="@{/preguntasUsuariosRangoFechas}">
+
+				<div class="form-group">
+					<label>Fecha Desde: </label>
+				</div>
+				
+				<div class="form-group w-25 p-3 mb-2">
+					<input type="date" value="01/01/2023" class="form-control" id="fechaDesde"
+              			th:value="${#calendars.format(fechaDesde,'yyyy-MM-dd HH:mm:ss')}" th:name="fechaDesde" required/>
+				</div>
+				
+				<div class="form-group">
+					<label>Fecha Hasta: </label>
+				</div>
+
+				<div class="form-group w-25 p-3 mb-2">
+					<input type="date" value="01/01/2023" class="form-control" id="fechaHasta"
+              			th:value="${#calendars.format(fechaHasta,'yyyy-MM-dd')}" th:name="fechaHasta" required/>
+				</div>
+
+				<div>
+					<input type="submit" class="btn btn-info mb-2" value="Buscar">
+					&nbsp;&nbsp;
+					<input type="button" class="btn btn-secondary mb-2" value="Limpiar" onclick="limpiar()">
+				</div>
+
+			</form>
+
+			<br>
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">Usuario</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Pregunta</th>
+						<th scope="col">Respuesta</th>
+						<th scope="col">Fecha</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="preguntaRangoFechas: ${listaPreguntasRangoFechas}">
+						<td th:text="${preguntaRangoFechas.usuario}"></td>
+						<td th:text="${preguntaRangoFechas.nombreUsuario}"></td>
+						<td th:text="${preguntaRangoFechas.pregunta}"></td>
+						<td th:text="${preguntaRangoFechas.respuesta}"></td>
+						<td th:text="${preguntaRangoFechas.fechaPreguntaHist}"></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+
+		<div class="container">
+			<a class=" btn btn-primary btn-lg" th:href="@{/}" role="button">Inicio</a>
+
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+			integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+			crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+			integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+			crossorigin="anonymous"></script>
+
+		<script type="text/javascript">
+			function limpiar() {
+				window.location = "/preguntasUsuariosRangoFechas";
+			}
+		</script>
+
+	</div>
+
+</body>
+
+<footer>
+
+	<div class="p-3 mb-2 bg-info-subtle text-emphasis-warning">
+
+		<div class="container bg-secondary" style='text-align:center'>
+			<p>
+			<p><b>2023 - Info Consultas Chat - Marcos</b></p>
+			</p>
+		</div>
+
+	</div>
+
+</footer>
+
+</html>
